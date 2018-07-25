@@ -38,24 +38,18 @@
                 <div id="menu2" class="nav-box menuhd">
                     <ul>
                         <li class="index">
-                            <a href="#" class="">
-                                <span class="out" style="top: 0px;">首页</span>
-                            </a>
+                             <router-link to="/index">
+                             <span class="out" style="top: 0px;">首页</span>
+                             </router-link>
                         </li>
                         <li class="news">
-                            <a href="#" class="">
-                                <span class="out" style="top: 0px;">每日精选</span>
-                            </a>
+                            <router-link to="/news"> <span class="out" style="top: 0px;">每日精选</span></router-link>   
                         </li>
                         <li class="photo">
-                            <a href="#" class="">
-                                <span class="out" style="top: 0px;">秒杀专区</span>
-                            </a>
+                            <router-link to="/miaosha"><span class="out" style="top: 0px;">秒杀专区</span></router-link>   
                         </li>
                         <li class="video">
-                            <a href="#" class="">
-                                <span class="out" style="top: 0px;">黑马超市</span>
-                            </a>
+                            <router-link to="/shopping"><span class="out" style="top: 0px;">黑马超市</span></router-link>                    
                         </li>
                         <li class="down">
                             <a href="#" class="">
@@ -81,6 +75,14 @@
         </div>
     </div>
 
+   
+   
+
+   <!--路由出口-->
+   <router-view>
+   
+   </router-view>
+   
    <!--底部-->
    <div class="footer">
                 <div class="section">
@@ -117,10 +119,7 @@
 </template>
 
 <script>
-
-export default {
-
-}
+export default {}
 </script>
 
 <style>

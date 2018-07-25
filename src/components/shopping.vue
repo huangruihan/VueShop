@@ -1,4 +1,5 @@
 <template>
+    <div class="shopping">
     <div>
         <div class="section">
             <div class="location">
@@ -243,13 +244,15 @@
             </div>
         </div>
     </div>
+    </div>
 </template>
 
 <script>
     export default{
-
+        
     }
 </script>
+
 <script scoped>
     
 </script>
