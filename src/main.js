@@ -9,6 +9,10 @@ import buyCar from './components/buyCar.vue';
 import payOrder from './components/payOrder.vue';
 import login from './components/login.vue';
 import orderInfo from './components/orderInfo.vue';
+import paySuccess from './components/paySuccess.vue';
+import personalCenter from './components/personalCenter.vue';
+import orderCenter from './components/orderCenter.vue';
+import lookOrder from './components/lookOrder.vue';
 // 导入ui框架
 import ElementUI from "element-ui";
 // 导入css
@@ -81,17 +85,42 @@ const router = new VueRouter({
     // 动态路由匹配
     {
       path:"/payOrder/:ids",
-      component:payOrder
+      component:payOrder,
+      meta: { checkLogin: true }
     },
     // 登陆路由
     {
       path:'/login',
-      component:login
+      component:login,
     },
     // 订单详情路由
     {
       path:"/orderInfo/:orderid",
-      component:orderInfo
+      component:orderInfo,
+      meta: { checkLogin: true }
+    },
+    {
+      //订单支付详情
+      path:'/paySuccess',
+      component:paySuccess,
+      meta: { checkLogin: true }
+    },
+    {
+      //个人中心页面
+      path:'/personalCenter',
+      component:personalCenter,
+      meta: { checkLogin: true }
+    },
+    {
+      path:'/orderCenter',
+      component:orderCenter,
+      meta: { checkLogin: true }
+    },
+    //订单详情页
+    {
+      path:'/lookOrder/:orderId',
+      component:lookOrder,
+      meta: { checkLogin: true }
     }
   ]
 });
@@ -100,8 +129,12 @@ const router = new VueRouter({
 
 
 // 注册全局过滤器
-Vue.filter('cutTime', function (value) {
-  return moment(value).format("YYYY年MM月DD日");
+Vue.filter('cutTime', function (value,myFormat) {
+  if(myFormat){
+    return moment(value).format(myFormat);
+  }else{
+    return moment(value).format("YYYY年MM月DD日");
+  }
 });
 
 // 判断数据是否存在
@@ -172,7 +205,7 @@ router.beforeEach((to, from, next) => {
   store.commit('saveFromPath',from.path);
 
   // from 从哪来 to 去哪里 next()下一个
-  if(to.path=='/payOrder'){
+  if(to.meta.checkLogin){
     // 判断
     axios.get("/site/account/islogin")
     .then(response=>{
